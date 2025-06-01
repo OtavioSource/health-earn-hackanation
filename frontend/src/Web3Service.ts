@@ -12,15 +12,18 @@ export async function connect(): Promise<User> {
   const accounts = await web3.eth.requestAccounts();
   if (!accounts || !accounts.length) throw new Error('No accounts found. Please connect your wallet.');
 
-  //const response = await axios.post(`${API_URL}connect/${accounts[0]}`);
+  const response = await axios.post(`${API_URL}connect/${accounts[0]}`);
+  console.log("Response from connect:", response.data);
+  
+  const user : User = new User(
+    true,
+    response.data.userInfo.name,
+    response.data.userInfo.age,
+    accounts[0],
+    response.data.userInfo.firstTime
+  );
 
-  return {
-    "isLoggedIn": true,
-    "name": "John Doe",
-    "age": 30,
-    "address": accounts[0],
-    "firstTime": true
-  } as User;
+  return user as User;
 }
 
 export async function updateUser(): Promise<User> {
