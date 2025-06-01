@@ -1,0 +1,115 @@
+/*---------------------------------------
+  HERO              
+-----------------------------------------*/
+.hero-section {
+  background-image: url('../images/vida-saudavel.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  padding-top: 150px;
+  padding-bottom: 150px;
+}
+
+.hero-section .section-overlay {
+  background: var(--primary-color);
+}
+
+.hero-section .custom-border-btn {
+  border-color: var(--secondary-color);
+  color: var(--primary-color);
+}
+
+.hero-section .custom-border-btn:hover {
+  background: var(--secondary-color);
+  color: var(--white-color);
+}
+
+.hero-form {
+  background: var(--social-icon-link-bg-color);
+  border-radius: var(--border-radius-small);
+  padding: 40px;
+}
+
+.hero-form .form-control {
+  padding-bottom: 10px;
+}
+
+.hero-form button[type="submit"] {
+  padding-top: 10px;
+  padding-bottom: 8px;
+}
+
+.hero-form .input-group-text i {
+  position: relative;
+  top: 2px;
+}
+
+.hero-section .badge {
+  background: transparent;
+  color: var(--white-color);
+}
+
+.hero-section .badge:hover {
+  background: var(--white-color);
+  color: var(--primary-color);
+}
+
+.badge {
+  background: var(--section-bg-color);
+  border: 1px solid var(--white-color);
+  border-radius: var(--border-radius-medium);
+  color: var(--primary-color);
+  font-weight: var(--font-weight-normal);
+  line-height: normal;
+  margin-right: 5px;
+  margin-left: 5px;
+  padding: 8px 12px;
+  padding-bottom: 6px;
+}
+
+.badge-level {
+  background: var(--primary-color);
+  color: var(--white-color);
+}
+
+.badge:hover {
+  background: var(--custom-btn-bg-color);
+  color: var(--white-color);
+}
+
+.section-overlay {
+  background: rgba(0, 0, 0, 0.85);
+  background: var(--custom-btn-bg-color);
+  opacity: 0.85;
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+/*---------------------------------------
+  SECTION               
+-----------------------------------------*/
+.section-padding {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.section-overlay + .container {
+  position: relative;
+}
+
+
+/* Para Chrome, Safari, Edge, Opera */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Para Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
