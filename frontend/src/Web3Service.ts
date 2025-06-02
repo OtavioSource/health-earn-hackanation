@@ -4,7 +4,7 @@ import { User } from "./UserContext";
 
 const API_URL = `${import.meta.env.VITE_API_URL}`;
 
-export async function connect(): Promise<User> {
+export async function createUser(): Promise<User> {
 
   if (!window.ethereum) throw new Error('No crypto wallet found. Please install it.');
 
@@ -12,7 +12,7 @@ export async function connect(): Promise<User> {
   const accounts = await web3.eth.requestAccounts();
   if (!accounts || !accounts.length) throw new Error('No accounts found. Please connect your wallet.');
 
-  const response = await axios.post(`${API_URL}connect/${accounts[0]}`);
+  const response = await axios.post(`${API_URL}/user/${accounts[0]}`);
   console.log("Response from connect:", response.data);
   
   const user : User = new User(
@@ -26,9 +26,11 @@ export async function connect(): Promise<User> {
   return user as User;
 }
 
-export async function updateUser(): Promise<User> {
-
-  const response = await axios.put(`${API_URL}user`);
-
-  return response.data as User;
+export async function updateUser(user: User): Promise<User> {
+ 
+  console.log("Updating user:", user);
+  const response = await axios.put(`${API_URL}/user`, user);
+  
+  console.log("Response from updateUser:", response.data);
+  return response.data.user as User;
 }

@@ -1,49 +1,32 @@
+import { useUser } from "./UserContext";
+import { NavLink } from "react-router-dom";
+
 function OverviewContent() {
-  return (
+
+    const { user, setUser } = useUser();
+    console.log("User in OverviewContent", user);
+
+    return (
                 <main className="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
                     <div className="title-group mb-3">
-                        <h1 className="h2 mb-0">Overview</h1>
+                        <h1 className="h2 mb-0">Perfil</h1>
 
-                        <small className="text-muted">Hello Thomas, welcome back!</small>
+                        <small className="text-muted">Olá {user.name}, seja bem vindo de volta!</small>
                     </div>
 
                     <div className="row my-4">
                         <div className="col-lg-7 col-12">
                             <div className="custom-block custom-block-balance">
-                                <small>Your Balance</small>
+                                <small>Seu saldo</small>
 
-                                <h2 className="mt-2 mb-3">$254,800</h2>
-
-                                <div className="custom-block-numbers d-flex align-items-center">
-                                    <span>****</span>
-                                    <span>****</span>
-                                    <span>****</span>
-                                    <p>2560</p>
-                                </div>
-
-                                <div className="d-flex">
-                                    <div>
-                                        <small>Valid Date</small>
-                                        <p>12/2028</p>
-                                    </div>
-
-                                    <div className="ms-auto">
-                                        <small>Card Holder</small>
-                                        <p>Thomas</p>
-                                    </div>
-                                </div>
+                                <h2 className="mt-2 mb-3">100 $WELL</h2>
                             </div>
 
                             <div className="custom-block bg-white">
                                 <h5 className="mb-4">History</h5>
 
-                                <div id="pie-chart"></div>
-                            </div>
-
-                            <div className="custom-block bg-white">
                                 <div id="chart"></div>
                             </div>
-
                             <div className="custom-block custom-block-exchange">
                                 <h5 className="mb-4">Exchange Rate</h5>
 
@@ -159,68 +142,29 @@ function OverviewContent() {
                                 <div className="custom-block-profile-image-wrap mb-4">
                                     <img src="images/medium-shot-happy-man-smiling.jpg" className="custom-block-profile-image img-fluid" alt=""/>
 
-                                    <a href="setting.html" className="bi-pencil-square custom-block-edit-icon"></a>
+                                    <NavLink to="/settings" className="bi-pencil-square custom-block-edit-icon"></NavLink>
                                 </div>
 
                                 <p className="d-flex flex-wrap mb-2">
-                                    <strong>Name:</strong>
+                                    <strong>Nome:</strong>
 
-                                    <span>Thomas Edison</span>
+                                    <span>{user.name}</span>
                                 </p>
 
                                 <p className="d-flex flex-wrap mb-2">
                                     <strong>Email:</strong>
-                                    
-                                    <a href="#">
-                                        thomas@site.com
-                                    </a>
+                                    <span>thomas@site.com</span>
                                 </p>
 
                                 <p className="d-flex flex-wrap mb-0">
-                                    <strong>Phone:</strong>
-
-                                    <a href="#">
-                                        (60) 12 345 6789
-                                    </a>
+                                    <strong>Idade</strong>
+                                    <span>{user.age}</span>
                                 </p>
                             </div>
 
-                            <div className="custom-block custom-block-bottom d-flex flex-wrap">
-                                <div className="custom-block-bottom-item">
-                                    <a href="#" className="d-flex flex-column">
-                                        <i className="custom-block-icon bi-wallet"></i>
-
-                                        <small>Top up</small>
-                                    </a>
-                                </div>
-
-                                <div className="custom-block-bottom-item">
-                                    <a href="#" className="d-flex flex-column">
-                                        <i className="custom-block-icon bi-upc-scan"></i>
-
-                                        <small>Scan & Pay</small>
-                                    </a>
-                                </div>
-
-                                <div className="custom-block-bottom-item">
-                                    <a href="#" className="d-flex flex-column">
-                                        <i className="custom-block-icon bi-send"></i>
-
-                                        <small>Send</small>
-                                    </a>
-                                </div>
-
-                                <div className="custom-block-bottom-item">
-                                    <a href="#" className="d-flex flex-column">
-                                        <i className="custom-block-icon bi-arrow-down"></i>
-
-                                        <small>Request</small>
-                                    </a>
-                                </div>
-                            </div>
 
                             <div className="custom-block custom-block-transations">
-                                <h5 className="mb-4">Recent Transations</h5>
+                                <h5 className="mb-4">Atividades dos amigos</h5>
 
                                 <div className="d-flex flex-wrap align-items-center mb-4">
                                     <div className="d-flex align-items-center">
@@ -230,14 +174,12 @@ function OverviewContent() {
                                             <p>
                                                 <a href="transation-detail.html">Daniel Jones</a>
                                             </p>
-
-                                            <small className="text-muted">C2C Transfer</small>
                                         </div>
                                     </div>
 
                                     <div className="ms-auto">
-                                        <small>05/12/2023</small>
-                                        <strong className="d-block text-danger"><span className="me-1">-</span> $250</strong>
+                                        <small>05/06/2025</small>
+                                        <strong className="d-block text-danger"><span className="me-1"></span>Andou 10km</strong>
                                     </div>
                                 </div>
 
@@ -247,16 +189,14 @@ function OverviewContent() {
 
                                         <div>
                                             <p>
-                                                <a href="transation-detail.html">Public Bank</a>
+                                                <a href="transation-detail.html">Amanda Nunes</a>
                                             </p>
-
-                                            <small className="text-muted">Mobile Reload</small>
                                         </div>
                                     </div>
 
                                     <div className="ms-auto">
-                                        <small>22/8/2023</small>
-                                        <strong className="d-block text-success"><span className="me-1">+</span> $280</strong>
+                                        <small>05/06/2025</small>
+                                        <strong className="d-block text-success"><span className="me-1"></span>Dormiu 8hrs</strong>
                                     </div>
                                 </div>
 
@@ -265,28 +205,26 @@ function OverviewContent() {
                                         <img src="images/profile/young-woman-with-round-glasses-yellow-sweater.jpg" className="profile-image img-fluid" alt=""/>
 
                                         <div>
-                                            <p><a href="transation-detail.html">Store</a></p>
-
-                                            <small className="text-muted">Payment Received</small>
+                                            <p><a href="transation-detail.html">´Jéssica Pereira</a></p>
                                         </div>
                                     </div>
 
                                     <div className="ms-auto">
-                                        <small>22/8/2023</small>
-                                        <strong className="d-block text-success"><span className="me-1">+</span> $280</strong>
+                                        <small>05/06/2025</small>
+                                        <strong className="d-block text-success"><span className="me-1"></span>Perdeu 350cal</strong>
                                     </div>
                                 </div>
 
                                 <div className="border-top pt-4 mt-4 text-center">
                                     <a className="btn custom-btn" href="wallet.html">
-                                        View all transations
+                                        Veja todas as atividades
                                         <i className="bi-arrow-up-right-circle-fill ms-2"></i>
                                     </a>
                                 </div>
                             </div>
 
                             <div className="custom-block primary-bg">
-                                <h5 className="text-white mb-4">Send Money</h5>
+                                <h5 className="text-white mb-4">Amigos</h5>
 
                                 <a href="#">
                                     <img src="images/profile/young-woman-with-round-glasses-yellow-sweater.jpg" className="profile-image img-fluid" alt=""/>

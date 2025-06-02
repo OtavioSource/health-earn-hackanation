@@ -8,6 +8,8 @@ import helmet from 'helmet';
 import fs from 'fs';
 import path from 'path';
 
+import { User } from './User';
+
 const PORT:number = parseInt(`${process.env.PORT || 3001}`);
 
 const app = express();
@@ -22,7 +24,7 @@ app.use(cors({
 
 app.use(express.json());
 
-app.post("/connect/:wallet", async (req: Request, res: Response, next: NextFunction) => {
+app.post("/user/:wallet", async (req: Request, res: Response, next: NextFunction) => {
     const wallet = req.params.wallet;
 
     const userInfo = {
@@ -53,6 +55,36 @@ app.post("/connect/:wallet", async (req: Request, res: Response, next: NextFunct
     fs.writeFileSync(dbPath, JSON.stringify(db, null, 2));
 
     res.json({ message: 'Usuário salvo com sucesso!', wallet, userInfo });
+});
+
+app.put("/user", async (req: Request, res: Response, next: NextFunction) => {
+
+    const user : User = req.body;
+    console.log("User received:", user);
+    const wallet = user.address;
+    const dbPath = path.join(process.cwd(), 'db.json');
+    let db: Record<string, any> = {};
+
+    if (fs.existsSync(dbPath)) {
+        const data = fs.readFileSync(dbPath, 'utf-8');
+        db = data ? JSON.parse(data) : {};
+    }
+
+    if (!db[wallet]) {
+        return res.status(404).json({ message: 'Usuário não encontrado', wallet });
+    }
+
+    // Atualiza apenas os campos enviados no body
+    db[wallet] = {
+        ...db[wallet],
+        ...req.body
+    };
+
+    fs.writeFileSync(dbPath, JSON.stringify(db, null, 2));
+
+    res.json({ message: 'Usuário atualizado com sucesso!', wallet, user: db[wallet] });
+
+
 });
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));

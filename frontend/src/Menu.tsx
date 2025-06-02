@@ -1,49 +1,38 @@
 // src/Home.tsx
+import { NavLink } from "react-router-dom";
+
 function Menu() {
     return (
         <>
-                                <nav id="sidebarMenu" className="col-md-3 col-lg-3 d-md-block sidebar collapse">
+                <nav id="sidebarMenu" className="col-md-3 col-lg-3 d-md-block sidebar collapse">
                     <div className="position-sticky py-4 px-3 sidebar-sticky">
                         <ul className="nav flex-column h-100">
                             <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="index.html">
+                                <NavLink className={({ isActive }) => "nav-link" + (isActive ? " active" : "")} aria-current="page" to="/overview">
                                     <i className="bi-house-fill me-2"></i>
                                     Overview
-                                </a>
+                                </NavLink>
                             </li>
 
                             <li className="nav-item">
-                                <a className="nav-link" href="wallet.html">
-                                    <i className="bi-wallet me-2"></i>
-                                    My Wallet
-                                </a>
-                            </li>
-
-                            <li className="nav-item">
-                                <a className="nav-link" href="profile.html">
+                                <NavLink className={({ isActive }) => "nav-link" + (isActive ? " active" : "")} to="/profile">
                                     <i className="bi-person me-2"></i>
                                     Profile
-                                </a>
+                                </NavLink>
                             </li>
 
                             <li className="nav-item">
-                                <a className="nav-link" href="setting.html">
+                                <NavLink className={({ isActive }) => "nav-link" + (isActive ? " active" : "")} to="/settings">
                                     <i className="bi-gear me-2"></i>
                                     Settings
-                                </a>
+                                </NavLink>
                             </li>
 
                             <li className="nav-item">
-                                <a className="nav-link" href="help-center.html">
+                                <NavLink className="nav-link" to="/help-chat">
                                     <i className="bi-question-circle me-2"></i>
-                                    Help Center
-                                </a>
-                            </li>
-
-                            <li className="nav-item featured-box mt-lg-5 mt-4 mb-4">
-                                <img src="images/credit-card.png" className="img-fluid" alt=""/>
-
-                                <a className="btn custom-btn" href="#">Upgrade</a>
+                                    Help Chat
+                                </NavLink>
                             </li>
 
                             <li className="nav-item border-top mt-auto pt-2">

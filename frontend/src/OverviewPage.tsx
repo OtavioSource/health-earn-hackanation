@@ -1,39 +1,52 @@
 // src/Home.tsx
+import { useState } from "react";
 import Header from "./Header";
 import Menu from "./Menu";
 import OverviewContent from "./OverviewContent";
 import { useUser } from "./UserContext";
 import { updateUser } from "./Web3Service";
+import { User } from "./UserContext";
 
 function OverviewPage() {
 
     const { user, setUser } = useUser();
+    const [name, setName] = useState("");
+    const [age, setAge] = useState("");
 
-    function submit() {
+    function submit(e: React.FormEvent) {
+        console.log("Entrou submit");
+        e.preventDefault();
 
-        updateUser()
+        const userRequest: User = {
+            isLoggedIn: user.isLoggedIn,
+            name: name,
+            age: parseInt(age),
+            address: user.address,
+            firstTime: false
+
+        }
+
+        updateUser(userRequest)
             .then((user) => {
+                console.log("User updated successfully", user);
                 setUser({
                     isLoggedIn: true,
                     name: user.name,
                     age: user.age,
                     address: user.address,
-                    firstTime: false
+                    firstTime: user.firstTime
                 });
-                
+
             })
             .catch((error) => {
-                console.error("Error connecting wallet:", error);
+                console.error("Error updateUser", error);
             });
 
     }
 
-    if (user.firstTime) {
-
-        
-
-        return (
-            <>
+    return (
+        <>
+            {user.firstTime ? <>
                 <Header />
                 <div className="container-fluid">
                     <div className="row">
@@ -48,17 +61,31 @@ function OverviewPage() {
                                             <div className="tab-pane fade show active" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabIndex={0}>
                                                 <h6 className="mb-4">Cadastro</h6>
 
-                                                <form className="custom-form profile-form" action="#" method="post" role="form">
-                                                    <input className="form-control" type="text" name="profile-name" id="profile-name" placeholder="Nome / Apelido" />
+                                                <form className="custom-form profile-form" action="#" method="post" onSubmit={submit} role="form">
+                                                    <input
+                                                        className="form-control"
+                                                        type="text"
+                                                        name="profile-name"
+                                                        id="profile-name"
+                                                        value={name}
+                                                        onChange={e => setName(e.target.value)}
+                                                        placeholder="Nome / Apelido" />
 
-                                                    <input className="form-control" type="number" name="profile-age" id="profile-age" placeholder="Idade" />
+                                                    <input
+                                                        className="form-control"
+                                                        type="number"
+                                                        name="profile-age"
+                                                        id="profile-age"
+                                                        value={age}
+                                                        onChange={e => setAge(e.target.value)}
+                                                        placeholder="Idade" />
 
                                                     <div className="d-flex">
                                                         <button type="button" className="form-control me-3">
                                                             Cancelar
                                                         </button>
 
-                                                        <button onClick={submit} className="form-control ms-2">
+                                                        <button type="submit" className="form-control ms-2">
                                                             Salvar
                                                         </button>
                                                     </div>
@@ -72,24 +99,17 @@ function OverviewPage() {
 
                     </div>
 
-                </div>
+                </div></> : <>                
+                <Header />
+                <div className="container-fluid">
+                    <div className="row">
+                        <Menu />
+                        <OverviewContent />
+                    </div>
 
-            </>
-        )
-    } else `{}`
-    return (
-        <>
-            <Header />
-            <div className="container-fluid">
-                <div className="row">
-                    <Menu />
-                    <OverviewContent />
-                </div>
-
-            </div>
-
+                </div></>}
         </>
-    );
+    )
 };
 
 export default OverviewPage;

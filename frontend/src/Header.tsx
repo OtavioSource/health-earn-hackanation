@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useUser } from "./UserContext";
-import { connect } from "./Web3Service";
+import { createUser } from "./Web3Service";
 
 function Header() {
 
@@ -8,8 +8,9 @@ function Header() {
 
     function onBtnClick() {
 
-        connect()
+        createUser()
             .then((user) => {
+                console.log("User createUser successfully", user);
                 setUser({
                     isLoggedIn: true,
                     name: user.name,
