@@ -1,7 +1,7 @@
 // src/Home.tsx
 import Header from "./Header";
 import Menu from "./Menu";
-import ProfileContent from "./HelpChatContent";
+import ProfileContent from "./ProfileContent";
 
 function ProfilePage() {
         return (
