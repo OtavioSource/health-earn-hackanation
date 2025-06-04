@@ -1,7 +1,8 @@
-import { useUser } from "./UserContext";
+import { useUser } from "../UserContext";
 import { useState } from "react";
-import { updateUser } from "./Web3Service";
-import { User } from "./UserContext";
+import { updateUser } from "../Web3Service";
+import { User } from "../UserContext";
+import { NavLink } from "react-router-dom";
 
 
 function SettingsContent() {
@@ -53,7 +54,7 @@ function SettingsContent() {
     return (
                 <main className="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
                     <div className="title-group mb-3">
-                        <h1 className="h2 mb-0">Settings</h1>
+                        <h1 className="h2 mb-0">Configuração</h1>
                     </div>
 
                     <div className="row my-4">
@@ -132,11 +133,12 @@ function SettingsContent() {
                         </div>
 
                         <div className="col-lg-5 col-12">
+                            
                             <div className="custom-block custom-block-contact">
-                                <h6 className="mb-4">Still can’t find what you looking for?</h6>
-                                <a href="#" className="btn custom-btn custom-btn-bg-white mt-3">
-                                    Chat with us
-                                </a>
+                                <h6 className="mb-4">Com a ajuda do nosso chat iremos te dar informações personalizadas e dicas para que vpcê possa ter uma vida saudável</h6>
+                                <NavLink to="/help-chat" className="btn custom-btn custom-btn-bg-white mt-3">
+                                    Chat
+                                </NavLink>
                             </div>
                         </div>
                     </div>

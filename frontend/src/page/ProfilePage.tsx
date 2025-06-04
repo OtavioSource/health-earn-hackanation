@@ -1,16 +1,16 @@
 // src/Home.tsx
-import Header from "./Header";
-import Menu from "./Menu";
-import HelpChatContent from "./HelpChatContent";
+import Header from "../Header";
+import Menu from "../Menu";
+import ProfileContent from "../content/ProfileContent";
 
-function HelpChatPage() {
+function ProfilePage() {
         return (
             <>
                 <Header />
                 <div className="container-fluid">
                     <div className="row">
                         <Menu />
-                        <HelpChatContent />
+                        <ProfileContent />
                     </div>
     
                 </div>
@@ -19,4 +19,4 @@ function HelpChatPage() {
         );
 };
 
-export default HelpChatPage;
+export default ProfilePage;

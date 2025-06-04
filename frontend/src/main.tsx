@@ -3,10 +3,10 @@ import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
 import { UserProvider } from "./UserContext";
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import OverviewPage from './OverviewPage'
-import ProfilePage from './ProfilePage'
-import SettingsPage from './SettingsPage.tsx'
-import HelpChatPage from './HelpChatPage.tsx'
+import OverviewPage from './page/OverviewPage.tsx'
+import ProfilePage from './page/ProfilePage.tsx'
+import SettingsPage from './page/SettingsPage.tsx'
+import HelpChatPage from './page/HelpChatPage.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

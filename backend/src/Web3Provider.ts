@@ -11,6 +11,7 @@ export async function mintAndTransfer(to: string, amount: number): Promise<Balan
     const contract = new web3.eth.Contract(WELL_ABI, `${process.env.CONTRACT_ADDRESS}`, {from: `${process.env.WALLET}`});
     
     const amountInWei = web3.utils.toWei(amount.toString(), 'ether');
+    
     const tx = await contract.methods.mint(to, amountInWei).send();
     const balanceOf = await contract.methods.balanceOf(to).call();
 

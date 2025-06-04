@@ -1,11 +1,11 @@
 // src/Home.tsx
 import { useState } from "react";
-import Header from "./Header";
-import Menu from "./Menu";
-import OverviewContent from "./OverviewContent";
-import { useUser } from "./UserContext";
-import { updateUser } from "./Web3Service";
-import { User } from "./UserContext";
+import Header from "../Header";
+import Menu from "../Menu";
+import OverviewContent from "../content/OverviewContent";
+import { useUser } from "../UserContext";
+import { updateUser } from "../Web3Service";
+import { User } from "../UserContext";
 
 function OverviewPage() {
 

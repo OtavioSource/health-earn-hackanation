@@ -1,4 +1,5 @@
-import { useUser } from "./UserContext";
+import { useUser } from "../UserContext";
+import { NavLink } from "react-router-dom";
 
 function ProfileContent() {
 
@@ -63,10 +64,10 @@ function ProfileContent() {
 
                         <div className="col-lg-5 col-12">
                             <div className="custom-block custom-block-contact">
-                                <h6 className="mb-4">Still can’t find what you looking for?</h6>
-                                <a href="#" className="btn custom-btn custom-btn-bg-white mt-3">
-                                    Chat with us
-                                </a>
+                                <h6 className="mb-4">Com a ajuda do nosso chat iremos te dar informações personalizadas e dicas para que vpcê possa ter uma vida saudável</h6>
+                                <NavLink to="/help-chat" className="btn custom-btn custom-btn-bg-white mt-3">
+                                    Chat
+                                </NavLink>
                             </div>
                         </div>
                     </div>

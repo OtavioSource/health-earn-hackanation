@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { useUser } from "./UserContext";
+import { useUser } from "../UserContext";
 import { NavLink } from "react-router-dom";
-import {mintReward} from "./Web3Service";
-import { User } from "./UserContext";
+import {mintReward} from "../Web3Service";
 
 function OverviewContent() {
 
@@ -75,7 +74,7 @@ function OverviewContent() {
                             </div>
 
                             <div className="custom-block bg-white">
-                                <h5 className="mb-4">History</h5>
+                                <h5 className="mb-4">Histórico de atividades</h5>
 
                                 <div id="chart"></div>
                             </div>
@@ -116,14 +115,14 @@ function OverviewContent() {
 
                                         <div>
                                             <p>
-                                                <a href="transation-detail.html">Daniel Jones</a>
+                                                <a href="#">Daniel Jones</a>
                                             </p>
                                         </div>
                                     </div>
 
                                     <div className="ms-auto">
                                         <small>05/06/2025</small>
-                                        <strong className="d-block text-danger"><span className="me-1"></span>Andou 10km</strong>
+                                        <strong className="d-block text-success"><span className="me-1"></span>Andou 10km</strong>
                                     </div>
                                 </div>
 
@@ -133,7 +132,7 @@ function OverviewContent() {
 
                                         <div>
                                             <p>
-                                                <a href="transation-detail.html">Amanda Nunes</a>
+                                                <a href="#">Amanda Nunes</a>
                                             </p>
                                         </div>
                                     </div>
@@ -149,18 +148,18 @@ function OverviewContent() {
                                         <img src="images/profile/young-woman-with-round-glasses-yellow-sweater.jpg" className="profile-image img-fluid" alt=""/>
 
                                         <div>
-                                            <p><a href="transation-detail.html">´Jéssica Pereira</a></p>
+                                            <p><a href="#">´Jéssica Pereira</a></p>
                                         </div>
                                     </div>
 
                                     <div className="ms-auto">
                                         <small>05/06/2025</small>
-                                        <strong className="d-block text-success"><span className="me-1"></span>Perdeu 350cal</strong>
+                                        <strong className="d-block text-danger"><span className="me-1"></span>Dormiu 4hrs</strong>
                                     </div>
                                 </div>
 
                                 <div className="border-top pt-4 mt-4 text-center">
-                                    <a className="btn custom-btn" href="wallet.html">
+                                    <a className="btn custom-btn" href="#">
                                         Veja todas as atividades
                                         <i className="bi-arrow-up-right-circle-fill ms-2"></i>
                                     </a>

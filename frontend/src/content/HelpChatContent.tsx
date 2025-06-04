@@ -1,4 +1,4 @@
-import { useUser } from "./UserContext";
+import { useUser } from "../UserContext";
 import { useState } from "react";
 import axios from "axios";
 
@@ -17,12 +17,10 @@ function HelpChatContent() {
         setLoading(true);
 
         try {
-        // Chame sua API de IA aqui (troque a URL pelo seu endpoint)
-        const response = await axios.post("/api/ia-chat", { question: input });
+        const response = await axios.post("https://webhook.waurumai.com/webhook/mensage", { mensagem: input, user_id: "1"});
         setMessages((msgs) => [
             ...msgs,
-            { from: "user", text: input },
-            { from: "bot", text: response.data.answer }
+            { from: "bot", text: response.data.text }
         ]);
         } catch (err) {
         setMessages((msgs) => [

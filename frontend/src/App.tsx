@@ -1,6 +1,6 @@
 
 import Home from "./Home";
-import OverviewPage from "./OverviewPage";
+import OverviewPage from "./page/OverviewPage";
 import { useUser } from "./UserContext";
 
 function App() {

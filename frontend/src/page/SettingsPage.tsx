@@ -1,7 +1,7 @@
 // src/Home.tsx
-import Header from "./Header";
-import Menu from "./Menu";
-import SettingsContent from "./SettingsContent";
+import Header from "../Header";
+import Menu from "../Menu";
+import SettingsContent from "../content/SettingsContent";
 
 function SettingsPage() {
         return (
