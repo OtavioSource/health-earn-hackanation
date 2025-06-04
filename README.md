@@ -10,7 +10,7 @@ O **Health Point** é um fluxo desenvolvido no **n8n** que classifica mensagens 
 
 ### 1. 📥 Entrada da Mensagem
 - **Nó:** `Webhook`
-- **Função:** Recebe mensagens via URL pública contendo o parâmetro `chatInput`, enviado pelo usuário.
+- **Função:** Recebe mensagens via URL pública contendo o parâmetro `mensagem`, enviado pelo usuário.
 
 ---
 
