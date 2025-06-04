@@ -20,7 +20,7 @@ function ProfileContent() {
 
                                     <div className="col-lg-3 col-12 mb-4 mb-lg-0">
                                         <div className="custom-block-profile-image-wrap">
-                                            <img src="images/medium-shot-happy-man-smiling.jpg" className="custom-block-profile-image img-fluid" alt=""/>
+                                            <img src="images/profile.png" className="custom-block-profile-image img-fluid" alt=""/>
 
                                             <a href="setting.html" className="bi-pencil-square custom-block-edit-icon"></a>
                                         </div>
@@ -36,7 +36,7 @@ function ProfileContent() {
                                         <p className="d-flex flex-wrap mb-2">
                                             <strong>Email:</strong>
                                             
-                                            <span>{user.name}</span>
+                                            <span>{user.email}</span>
                                         </p>
 
                                         <p className="d-flex flex-wrap mb-2">
@@ -46,15 +46,15 @@ function ProfileContent() {
                                         </p>
 
                                         <p className="d-flex flex-wrap mb-2">
-                                            <strong>Birthday:</strong>
+                                            <strong>Altura:</strong>
 
-                                            <span>March 5, 1992</span>
+                                             <span>{user.height}</span>
                                         </p>
 
                                         <p className="d-flex flex-wrap">
-                                            <strong>Address:</strong>
+                                            <strong>Peso:</strong>
 
-                                            <span>551 Swanston Street, Melbourne</span>
+                                             <span>{user.weight}</span>
                                         </p>
                                     </div>
                                 </div>

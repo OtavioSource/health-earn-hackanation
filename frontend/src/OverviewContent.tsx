@@ -1,10 +1,40 @@
+import { useState } from "react";
 import { useUser } from "./UserContext";
 import { NavLink } from "react-router-dom";
+import {mintReward} from "./Web3Service";
+import { User } from "./UserContext";
 
 function OverviewContent() {
 
     const { user, setUser } = useUser();
+    const [loading, setLoading] = useState(false);
     console.log("User in OverviewContent", user);
+    
+    function claimReward() {
+        setLoading(true);
+        mintReward(user.address)
+            .then((balanceOf) => {
+                console.log("User mintReward successfully", balanceOf);
+                setUser({
+                    isLoggedIn: true,
+                    name: user.name,
+                    age: user.age,
+                    address: user.address,
+                    firstTime: user.firstTime,
+                    balance: balanceOf,
+                    email: user.email,
+                    weight: user.weight,
+                    height: user.height
+                });
+            })
+            .catch((error) => {
+                console.error("Error connecting wallet:", error);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+
+    }
 
     return (
                 <main className="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
@@ -19,7 +49,29 @@ function OverviewContent() {
                             <div className="custom-block custom-block-balance">
                                 <small>Seu saldo</small>
 
-                                <h2 className="mt-2 mb-3">100 $WELL</h2>
+                                <h2 className="mt-2 mb-3">{user.balance ? user.balance : 0} $WELL</h2>
+                                <div className="d-flex">
+                                    <div>
+                                        <button
+                                        className="btn custom-btn"
+                                        onClick={claimReward}
+                                        disabled={loading}
+                                        type="button"
+                                        >
+                                        {loading ? (
+                                            <>
+                                            <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                                            Processando...
+                                            </>
+                                        ) : (
+                                            <>
+                                            Obtenha sua recompensa
+                                            <i className="bi-currency-dollar ms-2"></i>
+                                            </>
+                                        )}
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
 
                             <div className="custom-block bg-white">
@@ -27,120 +79,12 @@ function OverviewContent() {
 
                                 <div id="chart"></div>
                             </div>
-                            <div className="custom-block custom-block-exchange">
-                                <h5 className="mb-4">Exchange Rate</h5>
-
-                                <div className="d-flex align-items-center border-bottom pb-3 mb-3">
-                                    <div className="d-flex align-items-center">
-                                        <img src="images/flag/united-states.png" className="exchange-image img-fluid" alt=""/>
-
-                                        <div>
-                                            <p>USD</p>
-                                            <h6>1 US Dollar</h6>
-                                        </div>
-                                    </div>
-
-                                    <div className="ms-auto me-4">
-                                        <small>Sell</small>
-                                        <h6>1.0931</h6>
-                                    </div>
-
-                                    <div>
-                                        <small>Buy</small>
-                                        <h6>1.0821</h6>
-                                    </div>
-                                </div>
-
-                                <div className="d-flex align-items-center border-bottom pb-3 mb-3">
-                                    <div className="d-flex align-items-center">
-                                        <img src="images/flag/singapore.png" className="exchange-image img-fluid" alt=""/>
-
-                                        <div>
-                                            <p>SGD</p>
-                                            <h6>1 Singapore Dollar</h6>
-                                        </div>
-                                    </div>
-
-                                    <div className="ms-auto me-4">
-                                        <small>Sell</small>
-                                        <h6>0.6901</h6>
-                                    </div>
-
-                                    <div>
-                                        <small>Buy</small>
-                                        <h6>0.6201</h6>
-                                    </div>
-                                </div>
-
-                                <div className="d-flex align-items-center border-bottom pb-3 mb-3">
-                                    <div className="d-flex align-items-center">
-                                        <img src="images/flag/united-kingdom.png" className="exchange-image img-fluid" alt=""/>
-
-                                        <div>
-                                            <p>GPD</p>
-                                            <h6>1 British Pound</h6>
-                                        </div>
-                                    </div>
-
-                                    <div className="ms-auto me-4">
-                                        <small>Sell</small>
-                                        <h6>1.1520</h6>
-                                    </div>
-
-                                    <div>
-                                        <small>Buy</small>
-                                        <h6>1.1412</h6>
-                                    </div>
-                                </div>
-
-                                <div className="d-flex align-items-center border-bottom pb-3 mb-3">
-                                    <div className="d-flex align-items-center">
-                                        <img src="images/flag/australia.png" className="exchange-image img-fluid" alt=""/>
-
-                                        <div>
-                                            <p>AUD</p>
-                                            <h6>1 Australian Dollar</h6>
-                                        </div>
-                                    </div>
-
-                                    <div className="ms-auto me-4">
-                                        <small>Sell</small>
-                                        <h6>0.6110</h6>
-                                    </div>
-
-                                    <div>
-                                        <small>Buy</small>
-                                        <h6>0.5110</h6>
-                                    </div>
-                                </div>
-
-                                <div className="d-flex align-items-center">
-                                    <div className="d-flex align-items-center">
-                                        <img src="images/flag/european-union.png" className="exchange-image img-fluid" alt=""/>
-
-                                        <div>
-                                            <p>EUR</p>
-                                            <h6>1 Euro</h6>
-                                        </div>
-                                    </div>
-
-                                    <div className="ms-auto me-4">
-                                        <small>Sell</small>
-                                        <h6>1.1020</h6>
-                                    </div>
-
-                                    <div>
-                                        <small>Buy</small>
-                                        <h6>1.1010</h6>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
                         <div className="col-lg-5 col-12">
                             <div className="custom-block custom-block-profile-front custom-block-profile text-center bg-white">
                                 <div className="custom-block-profile-image-wrap mb-4">
-                                    <img src="images/medium-shot-happy-man-smiling.jpg" className="custom-block-profile-image img-fluid" alt=""/>
+                                    <img src="images/profile.png" className="custom-block-profile-image img-fluid" alt=""/>
 
                                     <NavLink to="/settings" className="bi-pencil-square custom-block-edit-icon"></NavLink>
                                 </div>
@@ -153,7 +97,7 @@ function OverviewContent() {
 
                                 <p className="d-flex flex-wrap mb-2">
                                     <strong>Email:</strong>
-                                    <span>thomas@site.com</span>
+                                    <span>{user.email}</span>
                                 </p>
 
                                 <p className="d-flex flex-wrap mb-0">

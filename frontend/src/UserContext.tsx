@@ -1,11 +1,15 @@
 import { createContext, useContext, useState } from "react";
 
 export class User {
-    isLoggedIn: boolean;
-    name: string;
-    age: number;
+    isLoggedIn?: boolean;
+    name?: string;
+    age?: number;
     address: string;
-    firstTime: boolean;
+    firstTime?: boolean;
+    balance?: string;
+    email?: string;
+    weight?: number;
+    height?: number;
 
     constructor(isLoggedIn: boolean, name: string, age: number, address: string, firstTime: boolean) {
         this.isLoggedIn = isLoggedIn;
@@ -25,7 +29,7 @@ type UserContextType = {
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState({ isLoggedIn: false, name: "", age: 0, address: "", firstTime: true })
+  const [user, setUser] = useState({ address: "" })
 
   return (
     <UserContext.Provider value={{ user, setUser }}>

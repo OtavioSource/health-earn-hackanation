@@ -1,4 +1,54 @@
+import { useUser } from "./UserContext";
+import { useState } from "react";
+import { updateUser } from "./Web3Service";
+import { User } from "./UserContext";
+
+
 function SettingsContent() {
+
+        const { user, setUser } = useUser();
+        const [name, setName] = useState("");
+        const [age, setAge] = useState("");
+        const [email, setEmail] = useState("");
+        const [height, setHeight] = useState("");
+        const [weight, setWeight] = useState("");
+
+            function submit(e: React.FormEvent) {
+                console.log("Entrou submit");
+                e.preventDefault();
+        
+                const userRequest: User = {
+                    isLoggedIn: user.isLoggedIn,
+                    name: name,
+                    age: parseInt(age),
+                    address: user.address,
+                    firstTime: false,
+                    email: email,
+                    weight: parseFloat(weight),
+                    height: parseFloat(height)
+        
+                }
+        
+                updateUser(userRequest)
+                    .then((user) => {
+                        console.log("User updated successfully", user);
+                        setUser({
+                            isLoggedIn: true,
+                            name: user.name,
+                            age: user.age,
+                            address: user.address,
+                            firstTime: user.firstTime,
+                            email: user.email,
+                            weight: user.weight,
+                            height: user.height
+                        });
+        
+                    })
+                    .catch((error) => {
+                        console.error("Error updateUser", error);
+                    });
+        
+            }
 
     return (
                 <main className="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
@@ -19,27 +69,63 @@ function SettingsContent() {
                                     <div className="tab-pane fade show active" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabIndex={0}>
                                         <h6 className="mb-4">User Profile</h6>
 
-                                        <form className="custom-form profile-form" action="#" method="post" role="form">
-                                            <input className="form-control" type="text" name="profile-name" id="profile-name" placeholder="John Doe"/>
+                                                <form className="custom-form profile-form" action="#" method="post" onSubmit={submit} role="form">
+                                                    <input
+                                                        className="form-control"
+                                                        type="text"
+                                                        name="profile-name"
+                                                        id="profile-name"
+                                                        value={name}
+                                                        onChange={e => setName(e.target.value)}
+                                                        placeholder="Nome / Apelido" />
 
-                                            <input className="form-control" type="email" name="profile-email" id="profile-email" placeholder="Johndoe@gmail.com"/>
+                                                    <input
+                                                        className="form-control"
+                                                        type="number"
+                                                        name="profile-age"
+                                                        id="profile-age"
+                                                        value={age}
+                                                        onChange={e => setAge(e.target.value)}
+                                                        placeholder="Idade" />
 
-                                            <div className="input-group mb-1">
-                                                <img src="images/profile/senior-man-white-sweater-eyeglasses.jpg" className="profile-image img-fluid" alt=""/>
+                                                    <input
+                                                        className="form-control"
+                                                        type="email"
+                                                        name="profile-email"
+                                                        id="profile-email"
+                                                        value={email}
+                                                        onChange={e => setEmail(e.target.value)}
+                                                        placeholder="Email" />
 
-                                                <input type="file" className="form-control" id="inputGroupFile02"/>
-                                            </div>
+                                                    <input
+                                                        className="form-control"
+                                                        type="number"
+                                                        step="0.01"
+                                                        name="profile-height"
+                                                        id="profile-height"
+                                                        value={height}
+                                                        onChange={e => setHeight(e.target.value)}
+                                                        placeholder="Altura" />
 
-                                            <div className="d-flex">
-                                                <button type="button" className="form-control me-3">
-                                                    Reset
-                                                </button>
+                                                    <input
+                                                        className="form-control"
+                                                        type="number"
+                                                        name="profile-weight"
+                                                        id="profile-weight"
+                                                        value={weight}
+                                                        onChange={e => setWeight(e.target.value)}
+                                                        placeholder="Peso" />
 
-                                                <button type="submit" className="form-control ms-2">
-                                                    Update
-                                                </button>
-                                            </div>
-                                        </form>
+                                                    <div className="d-flex">
+                                                        <button type="button" className="form-control me-3">
+                                                            Cancelar
+                                                        </button>
+
+                                                        <button type="submit" className="form-control ms-2">
+                                                            Salvar
+                                                        </button>
+                                                    </div>
+                                                </form>
                                     </div>
                                 </div>
                             </div>

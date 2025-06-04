@@ -1,6 +1,8 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
+import { mintAndTransfer } from './Web3Provider';  
+import { verifyAmount } from './HealthInfoService';
 import express, { Request, Response, NextFunction } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
@@ -84,7 +86,31 @@ app.put("/user", async (req: Request, res: Response, next: NextFunction) => {
 
     res.json({ message: 'Usuário atualizado com sucesso!', wallet, user: db[wallet] });
 
+});
 
+app.post("/mint/:wallet", async (req: Request, res: Response, next: NextFunction) => {
+    const wallet = req.params.wallet;
+    const amount = await verifyAmount();
+
+    if (!wallet) {
+        return res.status(400).json({ message: 'Wallet is required' });
+    }
+
+    if(!amount || amount <= 0) {
+        return res.status(400).json({ message: 'Invalid amount to mint' });
+    }
+
+    try {
+        console.log(`Minting ${amount} tokens for wallet: ${wallet}`);
+        
+        const response = await mintAndTransfer(wallet, amount);        
+        console.log(`Mint and transfer successful:`, response);
+
+        res.json({ message: 'Mint and transfer successful', transactionHash: response.txHash, balanceOf: response.balanceOf?.toString() });
+    } catch (error:any) {
+        console.error("Error during minting:", error);
+        res.status(500).json({ message: 'Error during minting', error: error.message });
+    }
 });
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));

@@ -34,3 +34,21 @@ export async function updateUser(user: User): Promise<User> {
   console.log("Response from updateUser:", response.data);
   return response.data.user as User;
 }
+
+export async function mintReward(wallet: string): Promise<string> {
+
+  const response = await axios.post(`${API_URL}/mint/${wallet}`);
+  console.log("Response from mintReward:", response.data);
+  
+  const web3 = new Web3(window.ethereum); 
+  
+  const balanceInWei = response.data.balanceOf;
+  console.log("Balance in Wei:", balanceInWei);
+
+  const balanceInEther = web3.utils.fromWei(balanceInWei, "ether");
+  console.log("Balance in Ether:", balanceInEther);
+
+  const balanceFormatted = Number(balanceInEther).toFixed(2);
+  return balanceFormatted;
+
+}

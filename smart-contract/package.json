@@ -7,7 +7,7 @@
     "test": "npx hardhat test",
     "compile": "npx hardhat compile",
     "deploy:dev": "npx hardhat ignition deploy ignition/modules/ProtoCoin.ts --network local",
-    "deploy:test": "npx hardhat ignition deploy ignition/modules/Well.ts --network bsctest"
+    "deploy:test": "npx hardhat ignition deploy ignition/modules/Well.ts --network bsctest --verify"
   },
   "keywords": [],
   "author": "",
@@ -15,7 +15,6 @@
   "description": "",
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
-    "@nomicfoundation/hardhat-ignition": "^0.15.11",
     "@nomiclabs/hardhat-etherscan": "^3.1.8",
     "hardhat": "^2.24.1"
   },

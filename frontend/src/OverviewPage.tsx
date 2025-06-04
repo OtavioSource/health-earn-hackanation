@@ -12,6 +12,9 @@ function OverviewPage() {
     const { user, setUser } = useUser();
     const [name, setName] = useState("");
     const [age, setAge] = useState("");
+    const [email, setEmail] = useState("");
+    const [height, setHeight] = useState("");
+    const [weight, setWeight] = useState("");
 
     function submit(e: React.FormEvent) {
         console.log("Entrou submit");
@@ -22,7 +25,10 @@ function OverviewPage() {
             name: name,
             age: parseInt(age),
             address: user.address,
-            firstTime: false
+            firstTime: false,
+            email: email,
+            weight: parseFloat(weight),
+            height: parseFloat(height)
 
         }
 
@@ -34,7 +40,10 @@ function OverviewPage() {
                     name: user.name,
                     age: user.age,
                     address: user.address,
-                    firstTime: user.firstTime
+                    firstTime: user.firstTime,
+                    email: user.email,
+                    weight: user.weight,
+                    height: user.height
                 });
 
             })
@@ -80,6 +89,34 @@ function OverviewPage() {
                                                         onChange={e => setAge(e.target.value)}
                                                         placeholder="Idade" />
 
+                                                    <input
+                                                        className="form-control"
+                                                        type="email"
+                                                        name="profile-email"
+                                                        id="profile-email"
+                                                        value={email}
+                                                        onChange={e => setEmail(e.target.value)}
+                                                        placeholder="Email" />
+
+                                                    <input
+                                                        className="form-control"
+                                                        type="number"
+                                                        step="0.01"
+                                                        name="profile-height"
+                                                        id="profile-height"
+                                                        value={height}
+                                                        onChange={e => setHeight(e.target.value)}
+                                                        placeholder="Altura" />
+
+                                                    <input
+                                                        className="form-control"
+                                                        type="number"
+                                                        name="profile-weight"
+                                                        id="profile-weight"
+                                                        value={weight}
+                                                        onChange={e => setWeight(e.target.value)}
+                                                        placeholder="Peso" />
+
                                                     <div className="d-flex">
                                                         <button type="button" className="form-control me-3">
                                                             Cancelar
@@ -99,7 +136,7 @@ function OverviewPage() {
 
                     </div>
 
-                </div></> : <>                
+                </div></> : <>
                 <Header />
                 <div className="container-fluid">
                     <div className="row">

@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import { useUser } from "./UserContext";
 import { createUser } from "./Web3Service";
+import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function Header() {
 
     const { user, setUser } = useUser();
+    const navigate = useNavigate();
 
-    function onBtnClick() {
+    function connectUser() {
 
         createUser()
             .then((user) => {
@@ -17,8 +20,9 @@ function Header() {
                     age: user.age,
                     address: user.address,
                     firstTime: user.firstTime
+
                 });
-                
+                navigate("/overview");
             })
             .catch((error) => {
                 console.error("Error connecting wallet:", error);
@@ -47,39 +51,39 @@ function Header() {
                         {user.isLoggedIn ?
                             <> <div className="dropdown px-3">
                                 <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="images/medium-shot-happy-man-smiling.jpg" className="profile-image img-fluid" alt="" />
+                                    <img src="images/profile.png" className="profile-image img-fluid" alt="" />
                                 </a>
                                 <ul className="dropdown-menu bg-white shadow">
                                     <li>
                                         <div className="dropdown-menu-profile-thumb d-flex">
-                                            <img src="images/medium-shot-happy-man-smiling.jpg" className="profile-image img-fluid me-3" alt="" />
+                                            <img src="images/profile.png" className="profile-image img-fluid me-3" alt="" />
 
                                             <div className="d-flex flex-column">
-                                                <small>Thomas</small>
-                                                <a href="#">thomas@site.com</a>
+                                                <small>{user.name}</small>
+                                                <a href="#">{user.email}</a>
                                             </div>
                                         </div>
                                     </li>
 
                                     <li>
-                                        <a className="dropdown-item" href="profile.html">
+                                        <NavLink className="dropdown-item" to="/profile">
                                             <i className="bi-person me-2"></i>
                                             Profile
-                                        </a>
+                                        </NavLink>
                                     </li>
 
                                     <li>
-                                        <a className="dropdown-item" href="setting.html">
+                                        <NavLink className="dropdown-item" to="/settings">
                                             <i className="bi-gear me-2"></i>
                                             Settings
-                                        </a>
+                                        </NavLink>
                                     </li>
 
                                     <li>
-                                        <a className="dropdown-item" href="help-center.html">
+                                        <NavLink className="dropdown-item" to="/help-chat">
                                             <i className="bi-question-circle me-2"></i>
                                             Help
-                                        </a>
+                                        </NavLink>
                                     </li>
 
                                     <li className="border-top mt-3 pt-2 mx-4">
@@ -89,7 +93,7 @@ function Header() {
                                         </a>
                                     </li>
                                 </ul>
-                            </div></> : <><a onClick={onBtnClick} className="btn custom-btn custom-btn-bg-white">Connect Wallet</a></>}
+                            </div></> : <><a onClick={connectUser} className="btn custom-btn custom-btn-bg-white">Connect Wallet</a></>}
                     </div>
                 </div>
             </header>
